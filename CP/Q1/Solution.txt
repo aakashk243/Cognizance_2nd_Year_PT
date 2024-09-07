@@ -1,0 +1,153 @@
+//Pairs 
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'pairs' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER k
+     *  2. INTEGER_ARRAY arr
+     */
+
+    public static int pairs(int k, List<Integer> arr) {
+    // Write your code here
+        int count = 0;
+        Set<Integer> myset = new HashSet<>(arr);
+        for(int num : arr) {
+            if(myset.contains(num-k)) {
+                count ++;
+            }
+        }
+        return count;
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int n = Integer.parseInt(firstMultipleInput[0]);
+
+        int k = Integer.parseInt(firstMultipleInput[1]);
+
+        String[] arrTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> arr = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int arrItem = Integer.parseInt(arrTemp[i]);
+            arr.add(arrItem);
+        }
+
+        int result = Result.pairs(k, arr);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
+// The Time in Words
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'timeInWords' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts following parameters:
+     *  1. INTEGER h
+     *  2. INTEGER m
+     */
+
+    public static String timeInWords(int h, int m) {
+    // Write your code here
+        int difference = 60 - m;
+        if(difference==60) {
+            return toWord(h)+" o' clock";
+        }
+        if(difference > 30) {
+            if(difference == 45) {
+                return "quarter past "+toWord(h);
+            } else if(difference==59) {
+                return toWord(m)+" minute past "+toWord(h);
+            } 
+            else {
+                return toWord(m)+" minutes past "+toWord(h);
+            }
+        } else if(difference < 30) {
+            if(difference == 15) {
+                return "quarter to "+toWord(h+1);
+            } else if(difference==1) {
+                return toWord(difference)+" minute to "+toWord(h+1);
+            } else {
+                return toWord(difference)+" minutes to "+toWord(h+1);
+            }
+        }
+        return "half past "+toWord(h);
+
+    }
+    public static String toWord(int n) {
+        String unit_digit[] = {"one","two","three","four","five","six","seven","eight","nine"};
+        String two_digit[] = {"eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
+        String ten_digit[] = {"ten","twenty"};
+        if(n/10==0) {
+            int i = (n%10)-1;
+            return unit_digit[i];
+        }
+        else if(n/10==1) {
+            if(n%10==0) {
+                return ten_digit[0];
+            }
+            int i = (n%10)-1;
+            return two_digit[i];
+        }
+        else {
+            if(n%10==2) {
+                return ten_digit[1];
+            }
+            int i = (n%10)-1;
+            return ten_digit[1]+" "+unit_digit[i];
+        }
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int h = Integer.parseInt(bufferedReader.readLine().trim());
+
+        int m = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String result = Result.timeInWords(h, m);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
