@@ -1,0 +1,9 @@
+ALGORITHM : 
+1.The decryption uses AES Algorithm
+2.The AES Algorithm requires a secret key for decryption of the given cipher.
+3.Convert The given Morse Code into Secret Key
+4.The Secret key is of 16 characters.So the Algorithm is AES-128 which has 10 rounds for decryption.
+5.Now use the cipher and select the algorithm for decryption and give the secret key.
+
+Password is : algorithmissafe
+Secret Code is : CogML24@2024
